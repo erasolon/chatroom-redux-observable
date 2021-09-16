@@ -34,6 +34,7 @@ async function predictAPI(model, features) {
         ...predictionResult,
         result: res.dataSync()[0] > 0.5 ? "Positive" : "Negative",
         confidence: res.dataSync()[0] > res.dataSync()[1] ? Math.round(res.dataSync()[0] * 100) : Math.round(res.dataSync()[1] * 100)
+
     }
     return predictionResult;
 
