@@ -46,15 +46,21 @@ async function predictAPI(model, features) {
  */
 async function diabetemlAPI(actions)  {
 
+    const result = [];
     const predictions = actions;
     const base_url = window.location.origin;
     const MODEL_URL = base_url + '/model/model.json';
-    const model = await tf.loadLayersModel(MODEL_URL);
-    console.log("**** model loaded "+ model.name)
-    const result = [];
-    for(let i = 0; i < predictions.length ; i++ ) {
-        await predictAPI(model,predictions[i]).then(res => result.push(res))
+    try {
+        const model = await tf.loadLayersModel(MODEL_URL);
+        console.log("**** model loaded "+ model.name)
+
+        for(let i = 0; i < predictions.length ; i++ ) {
+            await predictAPI(model,predictions[i]).then(res => result.push(res))
+        }
+    } catch (error) {
+        console.log( " ***** diabetemlAPI = " + error)
     }
+
     return result;
 
 }
