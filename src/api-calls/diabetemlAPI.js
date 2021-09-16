@@ -51,7 +51,10 @@ async function diabetemlAPI(actions)  {
     const base_url = window.location.origin;
     const MODEL_URL = base_url + '/model/model.json';
     try {
-        const model = await tf.loadLayersModel(MODEL_URL);
+
+        //const model = await tf.loadLayersModel(MODEL_URL);
+        const model = await tf.loadLayersModel(tf.io.browserHTTPRequest(MODEL_URL));
+
         for(let i = 0; i < predictions.length ; i++ ) {
             await predictAPI(model,predictions[i]).then(res => result.push(res))
         }
