@@ -9,3 +9,5 @@ customHeaders:
         value: 'application/octet-stream'
       - key: 'Accept-Ranges'
         value: 'bytes'
+      - key: 'test2'
+        value: '2'
