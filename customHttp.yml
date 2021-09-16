@@ -4,7 +4,7 @@ customHeaders:
       - key: 'Access-Control-Allow-Origin'
         value: '*'
       - key: 'Content-Type'
-          value: 'application/octet-stream'
+        value: 'application/octet-stream'
       - key: 'Accept-Ranges'
         value: 'bytes'
       - key: 'test2'
