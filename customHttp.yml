@@ -3,9 +3,9 @@ customHeaders:
     headers:
       - key: 'Access-Control-Allow-Origin'
         value: '*'
-      - key: 'test2'
-        value: '1'
   - pattern: '**/*.bin'
     headers:
-      - key: 'Content-Type'
+      - key: 'content-type'
         value: 'application/octet-stream'
+      - key: 'Accept-Ranges'
+        value: 'bytes'
