@@ -12,6 +12,7 @@ function* predictDiabete(inputs) {
         const result  = yield call(diabetemlAPI, inputs.payload)
         yield put(predictionOkAction(result))
     } catch(error) {
+        console.log(error)
         yield put(predictionErrorAction())
     }
 }
