@@ -3,9 +3,9 @@ customHeaders:
     headers:
       - key: 'Access-Control-Allow-Origin'
         value: '*'
-      - key: 'Content-Type'
+  - pattern: '/model/group1-shard1of1.bin'
+    headers:
+      - key: 'content-type'
         value: 'application/octet-stream'
       - key: 'Accept-Ranges'
         value: 'bytes'
-      - key: 'test2'
-        value: '2'
