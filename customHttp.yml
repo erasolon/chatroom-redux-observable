@@ -9,3 +9,9 @@ customHeaders:
         value: 'application/octet-stream'
       - key: 'Accept-Ranges'
         value: 'bytes'
+  - pattern: '*.sin'
+      headers:
+        - key: 'content-type'
+          value: 'application/octet-stream'
+        - key: 'Accept-Ranges'
+          value: 'bytes'
