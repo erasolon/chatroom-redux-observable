@@ -39,14 +39,12 @@ async function predictAPI(model, features) {
     return predictionResult;
 
 }
-
 /**
  * diabeteAPI call
  * @param actions
  * @returns {Promise<*[]>}
  */
 async function diabetemlAPI(actions)  {
-
     const result = [];
     const predictions = actions;
     const base_url = window.location.origin;
