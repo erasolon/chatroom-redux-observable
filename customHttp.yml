@@ -3,6 +3,8 @@ customHeaders:
     headers:
       - key: 'Access-Control-Allow-Origin'
         value: '*'
+      - key: 'test'
+        value: '2'
   - pattern: '*.bin'
     headers:
       - key: 'Content-Type'
