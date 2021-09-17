@@ -1,13 +1,9 @@
-applications:
-  - appRoot: Diabete Prediction
-    customHeaders:
-      - pattern: '**/*'
-        headers:
-          - key: 'Access-Control-Allow-Origin'
-            value: '*'
-      - pattern: '/model/*.bin'
-        headers:
-          - key: 'content-type'
-            value: 'application/octet-stream'
-          - key: 'Accept-Ranges'
-            value: 'bytes'
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: 'Access-Control-Allow-Origin'
+        value: '*'
+      - key: 'content-type'
+        value: 'application/octet-stream'
+      - key: 'Accept-Ranges'
+        value: 'bytes
