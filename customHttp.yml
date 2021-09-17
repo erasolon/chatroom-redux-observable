@@ -1,5 +1,5 @@
 customHeaders:
-  - pattern: '**/model/*.json'
+  - pattern: '**/*'
     headers:
       - key: 'content-type'
         value: 'application/octet-stream'
