@@ -1,5 +1,5 @@
 customHeaders:
-  - pattern: '*.json'
+  - pattern: '**/*json'
     headers:
       - key: 'content-type'
         value: 'application/octet-stream'
