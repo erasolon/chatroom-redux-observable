@@ -3,7 +3,7 @@ customHeaders:
     headers:
       - key: 'Access-Control-Allow-Origin'
         value: '*'
-  - pattern: '\.bin$'
+  - pattern: 'bin$'
     headers:
       - key: 'content-type'
         value: 'application/octet-stream'
