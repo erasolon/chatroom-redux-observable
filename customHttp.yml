@@ -1,5 +1,5 @@
 customHeaders:
-  - pattern: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>'
+  - pattern: "**/*[^.]json"
     headers:
       - key: 'content-type'
         value: 'application/octet-stream'
