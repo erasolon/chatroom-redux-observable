@@ -6,4 +6,4 @@ customHeaders:
       - key: 'content-type'
         value: 'application/octet-stream'
       - key: 'Accept-Ranges'
-        value: 'bytes
+        value: 'bytes'
