@@ -3,6 +3,8 @@ customHeaders:
     headers:
       - key: 'Access-Control-Allow-Origin'
         value: '*'
+  - pattern: '*.json'
+    headers:
       - key: 'content-type'
         value: 'application/octet-stream'
       - key: 'Accept-Ranges'
