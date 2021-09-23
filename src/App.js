@@ -1,12 +1,10 @@
 import React from 'react';
-import Diabeteml from "./components/diabeteml/diabeteml";
-import PredictionList from "./components/diabeteml/predictionlist";
+import Chatroom from "./components/chatroom/chatroom";
 
 function App() {
   return (
     <div className="App">
-        <Diabeteml />
-        <PredictionList/>
+        <Chatroom />
     </div>
   );
 }

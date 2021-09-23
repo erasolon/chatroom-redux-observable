@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/diabete-tensorflowjs-redux.iml" filepath="$PROJECT_DIR$/diabete-tensorflowjs-redux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chatroom-redux-observable.iml" filepath="$PROJECT_DIR$/chatroom-redux-observable.iml" />
     </modules>
   </component>
 </project>

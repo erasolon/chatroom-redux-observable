@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-import diabetemlReducer from './diabetemlSlice'
+import postReducer from './postSlice'
 
 export default combineReducers({
-    diabeteml: diabetemlReducer,
+    postReducer: postReducer,
 })
+
