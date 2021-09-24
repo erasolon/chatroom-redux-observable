@@ -4,7 +4,7 @@ import {Form, Button, ButtonGroup, Container, Row, Col} from 'react-bootstrap';
 import {connect} from "react-redux";
 import {sendPosts} from "../../actions/postActions";
 
-class Chatroom extends React.Component {
+class PostForm extends React.Component {
 
     /**
      * constructor
@@ -84,4 +84,4 @@ const mapDispatchToProps = dispatch => ({
     sendPosts: (state) => dispatch (sendPosts(state)),
 });
 
-export default connect(null,mapDispatchToProps)(Chatroom);
+export default connect(null,mapDispatchToProps)(PostForm);

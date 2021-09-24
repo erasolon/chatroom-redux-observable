@@ -1,10 +1,12 @@
 import React from 'react';
-import Chatroom from "./components/chatroom/chatroom";
+import PostForm from "./components/posts/postform";
+import PostsList from "./components/posts/postslist";
 
 function App() {
   return (
     <div className="App">
-        <Chatroom />
+        <PostForm />
+        <PostsList/>
     </div>
   );
 }
