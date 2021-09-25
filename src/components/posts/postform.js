@@ -2,7 +2,8 @@ import React from "react";
 
 import {Form, Button, ButtonGroup, Container, Row, Col} from 'react-bootstrap';
 import {connect} from "react-redux";
-import {sendPosts} from "../../actions/postActions";
+import {sendPosts, unSendPosts} from "../../actions/postActions";
+import {Statuses} from "../../types";
 
 class PostForm extends React.Component {
 
@@ -13,13 +14,14 @@ class PostForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            username: 'erasolon',
+            topic: 'ML',
             message: '',
         }
 
         this.baseState = this.state
         this.handleOnChange = this.handleOnChange.bind(this);
     }
-
     /**
      * handle Onchange event from inputs
      * @param event
@@ -27,7 +29,6 @@ class PostForm extends React.Component {
     handleOnChange(event) {
         this.setState({[event.target.name] : event.target.value})
     }
-
     /**
      * handle Send event
      * @param event
@@ -39,7 +40,6 @@ class PostForm extends React.Component {
             this.setState(this.baseState);
         }
     }
-
     /**
      * Render component
      * @returns {JSX.Element}
@@ -55,7 +55,21 @@ class PostForm extends React.Component {
                         <Row>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formName">
-                                    <Form.Control type="text" name="message" value={this.state.message} placeholder="Enter your post here " onChange={this.handleOnChange} required/>
+                                    <Form.Control type="text" name="username" value={this.state.username} placeholder="Enter your username" onChange={this.handleOnChange} required/>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Form.Group className="mb-3" controlId="formName">
+                                    <Form.Control type="text" name="topic" value={this.state.topic} placeholder="Enter the topic here" onChange={this.handleOnChange} required/>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Form.Group className="mb-3" controlId="formName">
+                                    <Form.Control type="text" name="message" value={this.state.message} placeholder="Enter your post here" onChange={this.handleOnChange} required/>
                                 </Form.Group>
                             </Col>
 
@@ -63,8 +77,8 @@ class PostForm extends React.Component {
                         <Row>
                             <Col>
                                 <ButtonGroup>
-                                    <Button variant="primary" type="button" size="sm" onClick={this.handlePrimaryButton}>
-                                        send
+                                    <Button variant="primary" type="button" size="sm" onClick={this.handlePrimaryButton} disabled={this.props.status === Statuses.POST_STATUS_PENDING}>
+                                        Send
                                     </Button>
                                 </ButtonGroup>
                             </Col>
@@ -80,8 +94,23 @@ class PostForm extends React.Component {
 
 }
 
+/**
+ * map dispatch to prop
+ * @param dispatch
+ * @returns {{sendPosts: (function(*=): *), unSendPosts: (function(*=): *)}}
+ */
 const mapDispatchToProps = dispatch => ({
     sendPosts: (state) => dispatch (sendPosts(state)),
+    unSendPosts: (state) => dispatch(unSendPosts(state))
 });
 
-export default connect(null,mapDispatchToProps)(PostForm);
+/**
+ * Map state to props
+ * @param state
+ * @returns {{status}}
+ */
+const mapStateToProps = (state) => ({
+    status: state.postReducer.status,
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(PostForm);
