@@ -1,27 +1,36 @@
 import React from "react";
 import {Container, Row, Table} from "react-bootstrap";
 import {connect} from "react-redux";
-import {fetchPosts, sendPosts, unSendPosts} from "../../actions/postActions";
+import { poolPostsStart, poolPostsStop} from "../../actions/postActions";
+import {Statuses} from "../../types";
 
 class PostsList extends React.Component{
-
-    constructor(props){
-        super(props);
-    }
 
     /**
      * component Did Mount
      */
     componentDidMount() {
-        this.props.fetchPosts()
+        this.props.poolPostsStart()
     }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.status === Statuses.FETCHING_STATUS_COMPLETED)
+            setTimeout(function() { //
+                console.log("restart the pool")
+                this.props.poolPostsStart()
+            }.bind(this), 20000)
+    }
+
 
     /**
      * render the list of the post
      * @returns {JSX.Element}
      */
     renderPosts = () => {
+
+
         return (
+
             <div>
                 <Container>
                     <Row>
@@ -36,7 +45,7 @@ class PostsList extends React.Component{
                             </thead>
                             <tbody>
                             { this.props.posts.map((post) => (
-                                <tr okey={post.id}>
+                                <tr>
                                     <td>{post.time}</td>
                                     <td>{post.username}</td>
                                     <td>{post.topic}</td>
@@ -88,13 +97,8 @@ const mapStateToProps = (state) => ({
     status: state.postListReducer.status,
 })
 
-/**
- * mapDispatchToProps
- * @param dispatch
- * @returns {{fetchPosts: (function(): *)}}
- */
 const mapDispatchToProps = dispatch => ({
-    fetchPosts: () => dispatch (fetchPosts()),
+    poolPostsStart: () => dispatch (poolPostsStart()),
+    poolPostsStop: () => dispatch (poolPostsStop())
 });
-
 export default connect(mapStateToProps,mapDispatchToProps)(PostsList);

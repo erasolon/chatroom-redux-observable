@@ -10,7 +10,12 @@ export const unSendPosts = state => ({
     payload: state
 })
 
-export const fetchPosts = () => ({
-    type: ActionTypes.FETCH_POSTS,
+export const poolPostsStart = () => ({
+    type: ActionTypes.POLL_POSTS_START,
+    payload: {}
+})
+
+export const poolPostsStop = () => ({
+    type: ActionTypes.POLL_POSTS_STOP,
     payload: {}
 })

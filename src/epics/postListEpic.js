@@ -1,9 +1,12 @@
 import {ofType} from "redux-observable";
 import {ActionTypes} from "../types";
-import {mergeMap} from "rxjs";
+import {
+    mergeMap,
+    race,
+    take,
+} from "rxjs";
 import {Axios} from "axios-observable";
 import store from "../store";
-import {addPostCompleted, addPostError, addPostPending} from "../reducers/postFormSlice";
 import {completedFetchingPost, errorFetchingPost, newPost} from "../reducers/postsListSlice";
 
 export function fetchPostsEpic (action$) {
@@ -16,14 +19,21 @@ export function fetchPostsEpic (action$) {
 
     return action$
         .pipe(
-            ofType(ActionTypes.FETCH_POSTS),
-            mergeMap(action => Axios.get(URL,axiosConfig)
-                    .subscribe({
-                        next: (v) => store.dispatch(newPost(v)),
-                        error: (e) => store.dispatch(errorFetchingPost(e)),
-                        complete: () => store.dispatch(completedFetchingPost()),
-                    })
+            ofType(ActionTypes.POLL_POSTS_START),
+            mergeMap(action => {
+                    race(
+                        Axios.get(URL, axiosConfig)
+                            .subscribe({
+                                next: (v) => v.data.forEach(s => store.dispatch(newPost(s))),
+                                error: (e) => store.dispatch(errorFetchingPost(e)),
+                                complete: () => store.dispatch(completedFetchingPost()),
+                            }),
+                        action$.pipe(
+                            ofType(ActionTypes.POLL_POSTS_STOP),
+                            take(1)
+                        )
+                    )
+                }
             ),
         )
-
 }

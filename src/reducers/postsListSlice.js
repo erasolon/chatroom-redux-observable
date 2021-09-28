@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {postFormSlice} from "./postFormSlice";
 import {Statuses} from "../types";
 
 const initialState = {
@@ -16,7 +15,7 @@ export const postsListSlice = createSlice ({
                 return ({
                     ...state,
                     posts: [ ...state.posts,action.payload],
-                    status: Statuses.POST_STATUS_PENDING,
+                    status: Statuses.FETCHING_STATUS_PENDING,
                     error: "",
                 })
             },
