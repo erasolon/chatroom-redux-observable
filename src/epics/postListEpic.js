@@ -10,10 +10,15 @@ import store from "../store";
 import {completedFetchingPost, errorFetchingPost, newPost} from "../reducers/postsListSlice";
 
 export function fetchPostsEpic (action$) {
-    const URL = "http://localhost:8080/api/posts"
-    const axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
+    const URL = "http://localhost:8080/api/postdate"
+    const axiosConfig = (action) => {
+        return {
+            params: {
+                'date': action.payload.date
+            },
+            headers: {
+                'Content-Type': 'application/json',
+            }
         }
     };
 
@@ -22,7 +27,7 @@ export function fetchPostsEpic (action$) {
             ofType(ActionTypes.POLL_POSTS_START),
             mergeMap(action => {
                     race(
-                        Axios.get(URL, axiosConfig)
+                        Axios.get(URL, axiosConfig(action))
                             .subscribe({
                                 next: (v) => v.data.forEach(s => store.dispatch(newPost(s))),
                                 error: (e) => store.dispatch(errorFetchingPost(e)),
@@ -33,7 +38,8 @@ export function fetchPostsEpic (action$) {
                             take(1)
                         )
                     )
-                }
+                },
+
             ),
         )
 }

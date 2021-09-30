@@ -4,7 +4,8 @@ import {Statuses} from "../types";
 const initialState = {
     posts: [],
     status: Statuses.FETCHING_STATUS_IDLE,
-    error: ""
+    error: "",
+    lastRun: "",
 }
 
 export const postsListSlice = createSlice ({
@@ -24,12 +25,14 @@ export const postsListSlice = createSlice ({
                     ...state,
                     status: Statuses.FETCHING_STATUS_ERROR,
                     error: action.payload,
+                    lastRun: Date.now(),
                 })
             },
             completedFetchingPost(state) {
                 return ({
                     ...state,
-                    status: Statuses.FETCHING_STATUS_COMPLETED
+                    status: Statuses.FETCHING_STATUS_COMPLETED,
+                    lastRun: Date.now(),
                 })
             },
         }

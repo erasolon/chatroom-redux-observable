@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/chatroom-redux-observable.iml" filepath="$PROJECT_DIR$/chatroom-redux-observable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/forum-redux-observable.iml" filepath="$PROJECT_DIR$/forum-redux-observable.iml" />
     </modules>
   </component>
 </project>

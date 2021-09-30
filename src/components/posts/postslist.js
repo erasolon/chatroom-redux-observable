@@ -2,7 +2,8 @@ import React from "react";
 import {Container, Row, Table} from "react-bootstrap";
 import {connect} from "react-redux";
 import { poolPostsStart, poolPostsStop} from "../../actions/postActions";
-import {Statuses} from "../../types";
+import {RefreshPosts} from "./refreshhook";
+import moment from "moment";
 
 class PostsList extends React.Component{
 
@@ -10,53 +11,40 @@ class PostsList extends React.Component{
      * component Did Mount
      */
     componentDidMount() {
-        this.props.poolPostsStart()
+        this.props.poolPostsStart('1970-01-01-01-01-01')
     }
-
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.status === Statuses.FETCHING_STATUS_COMPLETED)
-            setTimeout(function() { //
-                console.log("restart the pool")
-                this.props.poolPostsStart()
-            }.bind(this), 20000)
-    }
-
-
     /**
      * render the list of the post
      * @returns {JSX.Element}
      */
     renderPosts = () => {
-
-
         return (
-
             <div>
                 <Container>
                     <Row>
                         <Table>
                             <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Sender</th>
                                 <th>Topic</th>
+                                <th>Username</th>
                                 <th>Message</th>
                             </tr>
                             </thead>
                             <tbody>
                             { this.props.posts.map((post) => (
-                                <tr>
-                                    <td>{post.time}</td>
-                                    <td>{post.username}</td>
+                                <tr key={post.id.timestamp}>
                                     <td>{post.topic}</td>
+                                    <td>{post.username}<br/>{moment(Date.now()).diff(moment(Date.parse(post.time)), "hours")} hour(s)</td>
                                     <td>{post.message}</td>
                                 </tr>
                             ))}
                             </tbody>
-
                         </Table>
                     </Row>
                 </Container>
+                <div>
+                    <RefreshPosts props={this.props}/>
+                </div>
             </div>
 
         );
@@ -71,14 +59,14 @@ class PostsList extends React.Component{
             <div>
                 <Container>
                     <Row>
-                                <h4>Posts</h4>
-                                <hr />
-                            {this.props.posts &&
-                                this.props.posts.length > 0 ? (
-                                this.renderPosts()
-                                ) : (
-                                <span>No post found</span>
-                                )}
+                        <h4>Posts</h4>
+                        <hr />
+                    {this.props.posts &&
+                        this.props.posts.length > 0 ? (
+                        this.renderPosts()
+                        ) : (
+                        <span>No post found</span>
+                        )}
 
                     </Row>
                 </Container>
@@ -98,7 +86,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    poolPostsStart: () => dispatch (poolPostsStart()),
+    poolPostsStart: (date) => dispatch (poolPostsStart(date)),
     poolPostsStop: () => dispatch (poolPostsStop())
 });
 export default connect(mapStateToProps,mapDispatchToProps)(PostsList);

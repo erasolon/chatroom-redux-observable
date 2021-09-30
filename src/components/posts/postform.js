@@ -48,13 +48,14 @@ class PostForm extends React.Component {
         return (
             <div>
                 <Form>
-                    <Container>
+                    <Container fluid="md">
                         <Row>
-                            <h1>Public Chat Room</h1>
+                            <h1>Forum</h1>
                         </Row>
                         <Row>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formName">
+                                    <Form.Label>User Name</Form.Label>
                                     <Form.Control type="text" name="username" value={this.state.username} placeholder="Enter your username" onChange={this.handleOnChange} required/>
                                 </Form.Group>
                             </Col>
@@ -62,6 +63,7 @@ class PostForm extends React.Component {
                         <Row>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formName">
+                                    <Form.Label>Topic</Form.Label>
                                     <Form.Control type="text" name="topic" value={this.state.topic} placeholder="Enter the topic here" onChange={this.handleOnChange} required/>
                                 </Form.Group>
                             </Col>
@@ -69,7 +71,8 @@ class PostForm extends React.Component {
                         <Row>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formName">
-                                    <Form.Control type="text" name="message" value={this.state.message} placeholder="Enter your post here" onChange={this.handleOnChange} required/>
+                                    <Form.Label>Message</Form.Label>
+                                    <Form.Control type="textarea" rows={4} name="message" value={this.state.message} placeholder="Enter your post here" onChange={this.handleOnChange} required/>
                                 </Form.Group>
                             </Col>
 

@@ -10,9 +10,11 @@ export const unSendPosts = state => ({
     payload: state
 })
 
-export const poolPostsStart = () => ({
+export const poolPostsStart = (date) => ({
     type: ActionTypes.POLL_POSTS_START,
-    payload: {}
+    payload: {
+        date: date,
+    }
 })
 
 export const poolPostsStop = () => ({
